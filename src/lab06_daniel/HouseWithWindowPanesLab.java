@@ -9,6 +9,7 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
@@ -38,9 +39,10 @@ public class HouseWithWindowPanesLab extends Application {
             {HOUSE_POS_X + 25, HOUSE_POS_Y + 50, 50, 75},
             {HOUSE_POS_X + 225, HOUSE_POS_Y + 50, 50, 75},
         };
+        final int CHIMNEY_POS_X = HOUSE_POS_X + 100, CHIMNEY_POS_Y = HOUSE_POS_Y - 75, CHIMNEY_SIZE_X = 25, CHIMNEY_SIZE_Y = 50;
         final int DOOR_POS_X = HOUSE_POS_X + 120, DOOR_POS_Y = HOUSE_POS_Y + 100, DOOR_SIZE_X = 60, DOOR_SIZE_Y = 100;
-        final int ROOF_HEIGHT = 100;
-        final int BASE_HEIGHT = 50;
+        final int ROOF_HEIGHT = 100, BASE_HEIGHT = 15;
+        final int SUN_RADIUS = 75;
         
         //Create background sky rect
         Rectangle skyRect = new Rectangle(0,0, SCENE_WIDTH, SCENE_HEIGHT);
@@ -57,8 +59,33 @@ public class HouseWithWindowPanesLab extends Application {
         Rectangle doorRect = new Rectangle(DOOR_POS_X, DOOR_POS_Y, DOOR_SIZE_X, DOOR_SIZE_Y);
         doorRect.setFill(Color.BROWN);
         doorRect.setStroke(Color.BLACK);
-        root.getChildren().addAll(skyRect, houseRect, roofTriangle, doorRect);
-        //Create windows
+        //Create ground
+        Rectangle groundRect = new Rectangle(0, HOUSE_POS_Y + HOUSE_SIZE_Y, SCENE_WIDTH, SCENE_HEIGHT - HOUSE_POS_Y - HOUSE_SIZE_Y);
+        groundRect.setFill(Color.GREEN);
+        groundRect.setStroke(Color.DARKGREEN);
+        //Create base rect
+        Rectangle baseRect = new Rectangle(HOUSE_POS_X, HOUSE_POS_Y + HOUSE_SIZE_Y, HOUSE_SIZE_X, BASE_HEIGHT);
+        baseRect.setFill(Color.GRAY);
+        baseRect.setStroke(Color.BLACK);
+        //Create chimney
+        Rectangle chimneyRect = new Rectangle(CHIMNEY_POS_X, CHIMNEY_POS_Y, CHIMNEY_SIZE_X, CHIMNEY_SIZE_Y);
+        chimneyRect.setFill(Color.DARKRED);
+        chimneyRect.setStroke(Color.BLACK);
+        //Create sun
+        Circle sunCircle = new Circle(SCENE_WIDTH, 0, SUN_RADIUS);
+        sunCircle.setFill(Color.YELLOW);
+        sunCircle.setStroke(Color.GOLD);
+
+        //Add elements
+        root.getChildren().addAll(skyRect, houseRect, roofTriangle, doorRect, groundRect, baseRect, chimneyRect, sunCircle);
+       
+        //Create rays
+        for (int i = 1; i <= 5; i++) {
+            Line ray = new Line(SCENE_WIDTH, 0, SCENE_WIDTH - i * 30, 150 - 30 * i);
+            ray.setStroke(Color.YELLOW);
+            root.getChildren().add(ray);
+        }
+        //Create and addwindows
         for (int[] windowCoordinates : WINDOW_COORDINATES) {
             root.getChildren().addAll(createWindow(windowCoordinates));
         }
@@ -83,4 +110,6 @@ public class HouseWithWindowPanesLab extends Application {
         Line horizontal = new Line(posX, posY + sizeY/2, posX+ sizeX, posY + sizeY/2);
         return new Node[] {windowRect, vertical, horizontal};
     }
+    
+
 }
