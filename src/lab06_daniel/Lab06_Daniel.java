@@ -46,18 +46,22 @@ public class Lab06_Daniel extends Application {
         square2.setStroke(Color.BLACK);
         square2.setFill(null);
         // Create square #3 here. Set its stroke color to black and set its fill color to null. 
-        Rectangle square3 = new Rectangle(X3, Y3, WIDTH1, HEIGHT3);
-        square2.setStroke(Color.BLACK);
-        square2.setFill(null);
-        // Create the diagonal lines here. 
+        Rectangle square3 = new Rectangle(X3, Y3, WIDTH3, HEIGHT3);
+        square3.setStroke(Color.BLACK);
+        square3.setFill(null);
+        // Create the diagonal lines here.
+        Line lineUL = new Line(X1, Y1, X3, Y3);   
+        Line lineUR = new Line(X1 + WIDTH1, Y1, X3 + WIDTH3, Y3);
+        Line lineBL = new Line(X1, Y1 + HEIGHT1, X3, Y3 + WIDTH3);
+        Line lineBR = new Line(X1 + WIDTH1, Y1 + HEIGHT1, X3 + WIDTH3, Y3 + HEIGHT3);
         // Create the circle here. 
         // Add the nodes to a Pane here. 
         Pane root = new Pane();
-        root.getChildren().addAll(square1, square2, square3);   
+        root.getChildren().addAll(square1, square2, square3, lineUL, lineUR, lineBL, lineBR);   
         // Create a Scene with the Pane as the root node, 
         Scene scene = new Scene(root, SCENE_WIDTH, SCENE_HEIGHT);
         // and display it here. 
         stage.setScene(scene);
         stage.show();
-    }   
+    }       
 }
