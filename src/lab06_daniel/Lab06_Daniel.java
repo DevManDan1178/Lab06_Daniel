@@ -55,9 +55,10 @@ public class Lab06_Daniel extends Application {
         Line lineBL = new Line(X1, Y1 + HEIGHT1, X3, Y3 + WIDTH3);
         Line lineBR = new Line(X1 + WIDTH1, Y1 + HEIGHT1, X3 + WIDTH3, Y3 + HEIGHT3);
         // Create the circle here. 
+        Circle circle = new Circle(SCENE_WIDTH/2, SCENE_HEIGHT/2 ,WIDTH3/2);
         // Add the nodes to a Pane here. 
         Pane root = new Pane();
-        root.getChildren().addAll(square1, square2, square3, lineUL, lineUR, lineBL, lineBR);   
+        root.getChildren().addAll(square1, square2, square3, lineUL, lineUR, lineBL, lineBR, circle);   
         // Create a Scene with the Pane as the root node, 
         Scene scene = new Scene(root, SCENE_WIDTH, SCENE_HEIGHT);
         // and display it here. 
